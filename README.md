@@ -6,4 +6,4 @@ This app is programmed in Typescript, React using vite, and contentful CMS to ho
 
 - Run `yarn` to install all deps
 - To start the app; `yarn dev` 
-- The app should appear on `localhost:3000`# website
+- The app should appear on `localhost:3000`
