@@ -15,11 +15,11 @@ const App: React.FC = () => {
     <ThemeProvider theme={theme}>
       <CssBaseline />
       <BrowserRouter>
-        <Viewport>
-          <Suspense fallback={<Outline />}>
+        <Suspense fallback={<Outline />}>
+          <Viewport>
             <Routes />
-          </Suspense>
-        </Viewport>
+          </Viewport>
+        </Suspense>
       </BrowserRouter >
     </ThemeProvider >
   )
