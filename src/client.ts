@@ -16,7 +16,7 @@ export type MenuItemType = {
 type Response = {
     items: {
         fields: {
-            references: {
+            blocks: {
                 name: string;
                 slug: string;
             }
@@ -39,7 +39,7 @@ export const useMenu = () => {
         const fetch = async () => {
             try {
                 const resp: EntryCollection<any[] | any> = await client.getEntries({ content_type: 'assembly', 'fields.slug': 'site-root', include: 1 });
-                setMenu({ menuItems: resp.items[0].fields.references, error: null });
+                setMenu({ menuItems: resp.items[0].fields.blocks, error: null });
             }
             catch (e) {
                 console.error("content failed to render", e)
@@ -68,6 +68,7 @@ type View = {
 export const useView = (props: UseView) => {
     const { type, slug } = props
     const [view, setView] = useState<View>({ content: null, error: null });
+
 
 
     useEffect(() => {

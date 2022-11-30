@@ -7,6 +7,7 @@ import { BrowserRouter } from 'react-router-dom';
 import Outline from '@/components/Outline';
 import Routes from '@/Routes';
 import { theme } from '@/theme';
+import Viewport from '@/Viewport';
 
 const App: React.FC = () => {
 
@@ -14,9 +15,11 @@ const App: React.FC = () => {
     <ThemeProvider theme={theme}>
       <CssBaseline />
       <BrowserRouter>
-        <Suspense fallback={<Outline />}>
-          <Routes />
-        </Suspense>
+        <Viewport>
+          <Suspense fallback={<Outline />}>
+            <Routes />
+          </Suspense>
+        </Viewport>
       </BrowserRouter >
     </ThemeProvider >
   )

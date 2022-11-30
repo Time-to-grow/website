@@ -16,8 +16,7 @@ type FactoryProps = {
     content: {
         fields: {
             type: string;
-            references: any[];
-            layout: string;
+            blocks: any[];
         }
         sys: {
             contentType: {
@@ -48,7 +47,7 @@ const Renderer = (props: FactoryProps) => {
             {content && content.sys.contentType.sys.id === 'assembly'
                 ?
                 <Box>
-                    {content.fields.references.map((block, index) =>
+                    {content.fields.blocks?.map((block, index) =>
                         <Factory key={index} content={block} />
                     )}
                 </Box>
