@@ -1,23 +1,29 @@
-import React from 'react';
+import { JSX } from "react";
 
-import Stack from '@mui/material/Stack';
-import Typography from '@mui/material/Typography';
+import Link from "@mui/material/Link";
+import Stack from "@mui/material/Stack";
+import Typography from "@mui/material/Typography";
 
-const Footer: React.FC = () => {
-    const date = new Date().getFullYear();
-
+const Footer = (): JSX.Element => {
     return (
-        <Stack component="footer" sx={{ py: 6 }} alignItems="center" justifyContent="center" spacing={2}>
-            <Stack alignItems="center" spacing={2}>
-                <Typography align="center" color="grayText" variant="body1">
-                    {`All content © copyright  ${date} ${import.meta.env.VITE_APP_NAME}.`}
-                </Typography >
-                <Typography align="center" color="grayText" variant="body1">
-                    All rights reserved.
+        <>
+            <Stack sx={{ backgroundColor: "black", py: 2 }}>
+                <Typography align="center" color="white" variant="body1">
+                    View the source for this site{" "}
+                    <Link
+                        color="inherit"
+                        underline="always"
+                        sx={{
+                            "&:hover": { color: "primary.light" },
+                        }}
+                        rel="noreferrer"
+                        target="_blank"
+                        href="https://github.com/el-zacharoo/portfolio">
+                        here
+                    </Link>
                 </Typography>
             </Stack>
-        </Stack>
-    )
-}
+        </>
+    );
+};
 export default Footer;
-

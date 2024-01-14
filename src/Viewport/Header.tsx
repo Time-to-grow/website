@@ -1,110 +1,107 @@
-import React, { useState } from "react";
+import React, { useState, JSX } from "react";
 
-import MenuIcon from '@mui/icons-material/Menu';
+import MenuIcon from "@mui/icons-material/Menu";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
-// import CardMedia from "@mui/material/CardMedia";
 import IconButton from "@mui/material/IconButton";
 import Link from "@mui/material/Link";
-import Menu from '@mui/material/Menu';
-import MenuItem from '@mui/material/MenuItem';
+import Menu from "@mui/material/Menu";
 import Toolbar from "@mui/material/Toolbar";
+import { useQuery } from "@tanstack/react-query";
 import { useNavigate } from "react-router-dom";
 
-// import logo from '@/assets/logo.png';
-import { useMenu } from "@/client";
-import type { MenuItemType } from '@/client';
+import { THeader } from "@/types";
+import { fetchContent } from "@/views/Content/api";
 
-const Header: React.FC = () => {
-    const { menuItems } = useMenu();
+const Header = (): JSX.Element => {
+    const res = useQuery(["menu", "assembly", "site-root", 1], fetchContent);
+    const content = res.data?.items[0] as THeader;
+    const menuItems = content?.fields.blocks.filter(
+        (item) => item.fields.pageSlug !== "home"
+    );
+
+    const appName = import.meta.env.VITE_APP_NAME || "";
+
     const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
     const open = Boolean(anchorEl);
     const navigate = useNavigate();
 
-    const handleClick = (e: React.MouseEvent<HTMLElement>) => {
+    const handleClick = (e: React.MouseEvent<HTMLElement>): void => {
         setAnchorEl(e.currentTarget);
     };
-    const handleClose = () => {
+
+    const handleClose = (): void => {
         setAnchorEl(null);
     };
 
-    const handleNavigate = (path: string) => {
+    const handleNavigate = (path: string): void => {
+        setAnchorEl(null);
+        if (!path) {
+            return;
+        }
         if (path === "home") {
             navigate("/", { state: { data: path } });
         }
-        else {
-            navigate(`/${path}`, { state: { data: path } });
-        }
-    }
+        navigate(`/${path}`, { state: { data: path } });
+    };
 
     return (
-        <AppBar color="transparent" position="static" elevation={0}>
-            {menuItems &&
-                <Toolbar >
-                    <Box sx={{ flexGrow: 1 }}>
-                        <Link onClick={() => handleNavigate('home')} component="button" sx={{ cursor: 'pointer' }} underline="none" color="inherit">
-                            {/* <CardMedia component="img" sx={{ width: { xs: '40vw', sm: 200 } }} loading="lazy" src={logo} alt="Time to grow" /> */}
-                            Time to grow
-                        </Link>
-                    </Box>
-                    <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
-                        {menuItems.map((item: MenuItemType, index: number) =>
-                            <MenuButton item={item} onClick={() => handleNavigate(item.fields.slug)} key={index} />
-                        )}
-                    </Box>
-                    <Box sx={{ display: { xs: 'flex', md: 'none' } }}>
-                        <IconButton onClick={handleClick} color="inherit">
-                            <MenuIcon />
-                        </IconButton>
-                        <Menu anchorEl={anchorEl} open={open} onClose={handleClose}   >
-                            {menuItems.map((item: MenuItemType, index: number) =>
-                                <SmallMenuButton item={item} key={index} onClick={() => { handleNavigate(item.fields.slug), handleClose() }} />
-                            )}
-                        </Menu>
-                    </Box>
-                </Toolbar>
-            }
-        </AppBar>
-    )
-}
+        <>
+            <AppBar color="primary" position="static" elevation={0}>
+                {menuItems && (
+                    <Toolbar>
+                        <Box sx={{ flexGrow: 1 }}>
+                            <Link
+                                onClick={() =>
+                                    navigate("/", { state: { data: "home" } })
+                                }
+                                component="button"
+                                sx={{ cursor: "pointer" }}
+                                underline="none"
+                                color="inherit">
+                                {appName}
+                            </Link>
+                        </Box>
+                        <Box sx={{ display: { xs: "none", md: "flex" } }}>
+                            {menuItems.map((item, index) => (
+                                <Button
+                                    key={index}
+                                    sx={{ mx: 1 }}
+                                    color="inherit"
+                                    onClick={() =>
+                                        handleNavigate(item.fields.pageSlug)
+                                    }>
+                                    {item.fields.name}
+                                </Button>
+                            ))}
+                        </Box>
+                        <Box sx={{ display: { xs: "flex", md: "none" } }}>
+                            <IconButton onClick={handleClick} color="inherit">
+                                <MenuIcon />
+                            </IconButton>
+                            <Menu
+                                anchorEl={anchorEl}
+                                open={open}
+                                onClose={handleClose}>
+                                {menuItems.map((item, index) => (
+                                    <Button
+                                        key={index}
+                                        sx={{ mx: 1 }}
+                                        color="inherit"
+                                        onClick={() =>
+                                            handleNavigate(item.fields.pageSlug)
+                                        }>
+                                        {item.fields.name}
+                                    </Button>
+                                ))}
+                            </Menu>
+                        </Box>
+                    </Toolbar>
+                )}
+            </AppBar>
+        </>
+    );
+};
+
 export default Header;
-
-type MenuButtonProps = {
-    item: MenuItemType;
-    onClick: () => void;
-    href?: string;
-}
-
-const SmallMenuButton = (props: MenuButtonProps) => {
-    const { item } = props;
-
-    return (
-        <>
-            {item.fields.slug === 'home' ?
-                null
-                :
-                <MenuItem  {...props}>
-                    {item.fields.name}
-                </MenuItem>
-            }
-        </>
-    )
-
-}
-
-const MenuButton = (props: MenuButtonProps) => {
-    const { item } = props;
-
-    return (
-        <>
-            {item.fields.slug === 'home' ?
-                null
-                :
-                <Button sx={{ mx: 1 }} color="inherit" {...props}>
-                    {item.fields.name}
-                </Button>
-            }
-        </>
-    )
-}

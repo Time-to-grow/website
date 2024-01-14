@@ -1,21 +1,20 @@
-export const palette: object = {
+import { PaletteOptions } from "@mui/material";
+
+export const palette: PaletteOptions = {
     primary: {
-        main: '#212121',
+        main: "#2C7817",
     },
     secondary: {
-        main: '#7D93DA',
+        main: "#7D93DA",
     },
     text: {
-        primary: '#212121 ',
+        primary: "#212121 ",
     },
     background: {
-        default: '#FAFBFB',
+        default: "#FAFBFB",
         paper: "#fff"
     },
     success: {
-        main: '#52B788',
-    },
-    gray: {
-        100: '#F5F5F5',
+        main: "#52B788",
     }
 };

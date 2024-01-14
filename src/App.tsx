@@ -1,28 +1,37 @@
-import React, { Suspense } from 'react';
+import { lazy, Suspense, JSX } from "react";
 
-import CssBaseline from '@mui/material/CssBaseline';
-import { ThemeProvider } from '@mui/material/styles';
-import { BrowserRouter } from 'react-router-dom';
+import CssBaseline from "@mui/material/CssBaseline";
+import { ThemeProvider } from "@mui/material/styles";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 
-import Outline from '@/components/Outline';
-import Routes from '@/Routes';
-import { theme } from '@/theme';
-import Viewport from '@/Viewport';
+import { Outline } from "@/components/Outline";
+import { theme } from "@/theme";
+import Viewport from "@/Viewport";
 
-const App: React.FC = () => {
+const Content = lazy(() => import("@/views/Content"));
 
-  return (
-    <ThemeProvider theme={theme}>
-      <CssBaseline />
-      <BrowserRouter>
-        <Suspense fallback={<Outline />}>
-          <Viewport>
-            <Routes />
-          </Viewport>
-        </Suspense>
-      </BrowserRouter >
-    </ThemeProvider >
-  )
-}
+const queryClient = new QueryClient();
 
-export default App; 
+const App = (): JSX.Element => {
+    return (
+        <ThemeProvider theme={theme}>
+            <CssBaseline />
+            <QueryClientProvider client={queryClient}>
+                <BrowserRouter>
+                    <Suspense fallback={<Outline />}>
+                        <Viewport>
+                            <Routes>
+                                <Route path="/" element={<Content />} />
+                                <Route path="/:slug" element={<Content />} />
+                                <Route path="/:type/:slug" element={<Content />} />
+                            </Routes>
+                        </Viewport>
+                    </Suspense>
+                </BrowserRouter>
+            </QueryClientProvider>
+        </ThemeProvider>
+    );
+};
+
+export default App;

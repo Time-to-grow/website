@@ -1,29 +1,20 @@
-import React from 'react'; 
+import React, { JSX } from "react";
 
-import Box from '@mui/material/Box'; 
-import Container from '@mui/material/Container';
-
-import Footer from './Footer';
-import Header from './Header';
+import Footer from "./Footer";
+import Header from "./Header";
 
 type ViewportProps = {
     children: React.ReactNode;
-}
+};
 
-const Viewport = (props: ViewportProps) => {
-    const { children } = props;
-
+const Viewport = ({ children }: ViewportProps): JSX.Element => {
     return (
         <>
             <Header />
-            <Container sx={{ minHeight: '70vh' }} maxWidth="xl">
-                <Box sx={{ mx: { xs: '0.25rem', sm: '2.5rem' } }}>
-                    {children}
-                </Box>
-            </Container>
+            {children}
             <Footer />
         </>
-    )
-}
+    );
+};
 
-export default Viewport
+export default Viewport;
