@@ -7,7 +7,7 @@ import Typography from "@mui/material/Typography";
 const Footer = (): JSX.Element => {
     return (
         <>
-            <Stack sx={{ backgroundColor: "black", py: 2 }}>
+            <Stack sx={{ backgroundColor: "text.primary", py: 2 }}>
                 <Typography align="center" color="white" variant="body1">
                     View the source for this site{" "}
                     <Link

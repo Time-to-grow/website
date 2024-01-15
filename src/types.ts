@@ -20,8 +20,6 @@ export type THerobanner = {
         subheader: string;
         body: string;
         featureImage: Asset;
-        ctaLabel: string;
-        ctaLink: string;
     }>
 };
 

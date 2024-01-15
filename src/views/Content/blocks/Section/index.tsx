@@ -12,13 +12,13 @@ const SectionBody = (props: SectionTypes): JSX.Element => {
     const { contentEntry } = props;
 
     switch (contentEntry?.fields.direction) {
-        case "center":
+        case "Centre":
             return <Center contentEntry={contentEntry} />;
-        case "right":
+        case "Right":
             return <Right contentEntry={contentEntry} />;
-        case "left":
+        case "Left":
             return <Left contentEntry={contentEntry} />;
-        case "column":
+        case "Column":
             return <Column contentEntry={contentEntry} />;
         default:
             return <Center contentEntry={contentEntry} />;
@@ -27,7 +27,7 @@ const SectionBody = (props: SectionTypes): JSX.Element => {
 
 const Section = (props: SectionTypes): JSX.Element => {
     return (
-        <Container>
+        <Container sx={{ backgroundColor: "background.default" }} maxWidth="xl">
             <SectionBody {...props} />
         </Container>
     );

@@ -393,7 +393,7 @@
   "resolved" "https://registry.npmjs.org/@emotion/memoize/-/memoize-0.8.1.tgz"
   "version" "0.8.1"
 
-"@emotion/react@^11.0.0-rc.0", "@emotion/react@^11.11.1", "@emotion/react@^11.4.1", "@emotion/react@^11.5.0":
+"@emotion/react@^11.0.0-rc.0", "@emotion/react@^11.11.3", "@emotion/react@^11.4.1", "@emotion/react@^11.5.0":
   "integrity" "sha512-Cnn0kuq4DoONOMcnoVsTOR8E+AdnKFf//6kUWc4LCdnxj31pZWn7rIULd6Y7/Js1PiPHzn7SKCM9vB/jBni8eA=="
   "resolved" "https://registry.npmjs.org/@emotion/react/-/react-11.11.3.tgz"
   "version" "11.11.3"
@@ -738,14 +738,14 @@
   "resolved" "https://registry.npmjs.org/@mui/core-downloads-tracker/-/core-downloads-tracker-5.15.4.tgz"
   "version" "5.15.4"
 
-"@mui/icons-material@^5.15.0":
+"@mui/icons-material@^5.15.4":
   "integrity" "sha512-q/Yk7aokN8qGMpR7bwoDpBSeaNe6Bv7vaY9yHYodP37c64TM6ime05ueb/wgksOVszrKkNXC67E/XYbRWOoUFA=="
   "resolved" "https://registry.npmjs.org/@mui/icons-material/-/icons-material-5.15.4.tgz"
   "version" "5.15.4"
   dependencies:
     "@babel/runtime" "^7.23.7"
 
-"@mui/material@^5.0.0", "@mui/material@^5.15.0":
+"@mui/material@^5.0.0", "@mui/material@^5.15.4":
   "integrity" "sha512-T/LGRAC+M0c+D3+y67eHwIN5bSje0TxbcJCWR0esNvU11T0QwrX3jedXItPNBwMupF2F5VWCDHBVLlFnN3+ABA=="
   "resolved" "https://registry.npmjs.org/@mui/material/-/material-5.15.4.tgz"
   "version" "5.15.4"
@@ -782,7 +782,7 @@
     "csstype" "^3.1.2"
     "prop-types" "^15.8.1"
 
-"@mui/system@^5.15.0", "@mui/system@^5.15.4":
+"@mui/system@^5.15.4":
   "integrity" "sha512-KCwkHajGBXPs2TK1HJjIyab4NDk0cZoBDYN/TTlXVo1qBAmCjY0vjqrlsjeoG+wrwwcezXMLs/e6OGP66fPCog=="
   "resolved" "https://registry.npmjs.org/@mui/system/-/system-5.15.4.tgz"
   "version" "5.15.4"
@@ -1966,7 +1966,7 @@
   dependencies:
     "@types/react" "*"
 
-"@types/react@*", "@types/react@^17.0.0 || ^18.0.0", "@types/react@^18.2.45":
+"@types/react@*", "@types/react@^17.0.0 || ^18.0.0", "@types/react@^18.2.47":
   "integrity" "sha512-xquNkkOirwyCgoClNk85BjP+aqnIS+ckAJ8i37gAbDs14jfW/J23f2GItAf33oiUPQnqNMALiFeoM9Y5mbjpVQ=="
   "resolved" "https://registry.npmjs.org/@types/react/-/react-18.2.47.tgz"
   "version" "18.2.47"
@@ -3490,7 +3490,7 @@
     "p-throttle" "^4.1.1"
     "qs" "^6.11.2"
 
-"contentful@^10.6.14":
+"contentful@^10.6.16":
   "integrity" "sha512-3PF4VQAWOhy7CiGYm4KtQn9AN81p77BgSCDQNndFfWdggs6/b2wMWXkmN1UGSJI7OKBRpbiy12mNrr7SrvuVIA=="
   "resolved" "https://registry.npmjs.org/contentful/-/contentful-10.6.16.tgz"
   "version" "10.6.16"
@@ -8317,7 +8317,7 @@
   "resolved" "https://registry.npmjs.org/react-refresh/-/react-refresh-0.14.0.tgz"
   "version" "0.14.0"
 
-"react-router-dom@^6.21.0":
+"react-router-dom@^6.21.2":
   "integrity" "sha512-tE13UukgUOh2/sqYr6jPzZTzmzc70aGRP4pAjG2if0IP3aUT+sBtAKUJh0qMh0zylJHGLmzS+XWVaON4UklHeg=="
   "resolved" "https://registry.npmjs.org/react-router-dom/-/react-router-dom-6.21.2.tgz"
   "version" "6.21.2"

@@ -38,7 +38,9 @@ const Content = (): JSX.Element => {
 
 export default Content;
 
-const ContentBlock = ( props: ContentEntry): Iterable<React.ReactNode> | JSX.Element | React.ReactNode => {
+const ContentBlock = (
+    props: ContentEntry
+): Iterable<React.ReactNode> | JSX.Element | React.ReactNode => {
     const { contentEntry } = props;
 
     const name = contentEntry?.sys?.contentType.sys.id;

@@ -14,29 +14,25 @@ const Right = (props: SectionTypes): JSX.Element => {
     return (
         <>
             {contentEntry && (
-                <Grid container direction="row-reverse" spacing={2}>
+                <Grid container direction="row" sx={{ my: 2 }} spacing={2}>
                     <Grid xs={12} sm={6}>
-                        {contentEntry.fields.image.fields.file?.url && (
+                        {contentEntry.fields.image && (
                             <CardMedia
                                 component="img"
-                                sx={{ width: "100%", height: "auto" }}
-                                src={url as string}
-                                alt={
-                                    contentEntry.fields.image.fields
-                                        .title as string
-                                }
+                                // sx={{ width: "100%", height: "auto" }}
+                                src={String(url)}
+                                alt={`image ${contentEntry.fields.headline}`}
                             />
                         )}
                     </Grid>
                     <Grid xs={12} sm={6}>
-                        <Typography
-                            id="sectionHeadline"
-                            align="center"
-                            variant="h2">
+                        <Typography id="sectionHeadline" variant="h2">
                             {contentEntry.fields.headline}
                         </Typography>
+                        <Typography color="textSecondary">
+                            {contentEntry.fields.body}
+                        </Typography>
                     </Grid>
-                    <Typography>{contentEntry.fields.body}</Typography>
                 </Grid>
             )}
         </>
