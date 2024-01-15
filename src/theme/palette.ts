@@ -18,5 +18,10 @@ export const palette: PaletteOptions = {
     },
     info: {
         main: "#FFFAF0",
+    },
+    grey: {
+        100: "#E5E5E5",
+        200: "#C4C4C4",
+
     }
 };

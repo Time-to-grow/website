@@ -1,7 +1,6 @@
 import { JSX } from "react";
 
 import Box from "@mui/material/Box";
-import Container from "@mui/material/Container";
 
 import Center from "./Center";
 import Column from "./Column";
@@ -28,10 +27,8 @@ const SectionBody = (props: SectionTypes): JSX.Element => {
 
 const Section = (props: SectionTypes): JSX.Element => {
     return (
-        <Box sx={{ backgroundColor: "background.default" }}>
-            <Container maxWidth="xl">
-                <SectionBody {...props} />
-            </Container>
+        <Box sx={{ backgroundColor: "background.default", py: 4 }}>
+            <SectionBody {...props} />
         </Box>
     );
 };

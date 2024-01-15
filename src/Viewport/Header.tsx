@@ -48,7 +48,11 @@ const Header = (): JSX.Element => {
 
     return (
         <>
-            <AppBar color="primary" position="fixed" elevation={0}>
+            <AppBar
+                sx={{ my: 4 }}
+                color="transparent"
+                position="relative"
+                elevation={0}>
                 {menuItems && (
                     <Toolbar>
                         <Box sx={{ flexGrow: 1 }}>
@@ -66,7 +70,7 @@ const Header = (): JSX.Element => {
                         <Box
                             sx={{
                                 display: { xs: "none", md: "flex" },
-                                "&:hover": { color: "grayText" },
+                                "&:hover": { color: "grey.200" },
                             }}>
                             {menuItems.map((item, index) => (
                                 <Button
@@ -74,7 +78,9 @@ const Header = (): JSX.Element => {
                                     sx={{
                                         mx: 1,
                                         "&:hover": {
-                                            color: "background.paper",
+                                            color: "primary.main",
+                                            backgroundColor:
+                                                "background.default",
                                         },
                                     }}
                                     color="inherit"

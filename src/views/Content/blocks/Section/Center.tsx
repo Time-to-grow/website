@@ -1,5 +1,6 @@
-import { JSX } from "react";
+import { JSX, useEffect, useState } from "react";
 
+import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import CardMedia from "@mui/material/CardMedia";
 import Stack from "@mui/material/Stack";
@@ -9,18 +10,38 @@ import type { SectionTypes } from "@/types";
 
 const Center = (props: SectionTypes): JSX.Element => {
     const { contentEntry } = props;
+    const [scrollPosition, setScrollPosition] = useState<number>(0);
 
     const { url } = contentEntry.fields.image.fields.file ?? {};
+
+    useEffect(() => {
+        const handleScroll = () => {
+            setScrollPosition(window.scrollY);
+        };
+
+        window.addEventListener("scroll", handleScroll);
+        return () => {
+            window.removeEventListener("scroll", handleScroll);
+        };
+    }, []);
 
     return (
         <Stack alignItems="center" spacing={2}>
             {contentEntry.fields.image && (
-                <CardMedia
-                    component="img"
-                    sx={{ width: "100%", height: "auto" }}
-                    src={url as string}
-                    alt={contentEntry.fields.image.fields.title as string}
-                />
+                <Box>
+                    <CardMedia
+                        component="img"
+                        sx={{
+                            py: 5,
+                            width: "100%",
+                            transform: `translateY(${scrollPosition * 0.25}px)`,
+                            position: "relative",
+                            // zIndex: -1,
+                        }}
+                        src={String(url)}
+                        alt={`image ${contentEntry.fields.headline}`}
+                    />
+                </Box>
             )}
             {contentEntry?.fields.headline && (
                 <Typography

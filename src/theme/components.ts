@@ -8,6 +8,8 @@ export const components: Components = {
                 borderWidth: "2px",
                 "&:hover": {
                     borderWidth: "2px",
+                    backgroundColor: "#fff",
+                    color: "#111830",
                 },
             }
         }
