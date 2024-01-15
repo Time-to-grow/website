@@ -1,15 +1,15 @@
 import { PaletteOptions } from "@mui/material";
 
 export const palette: PaletteOptions = {
-    primary: { 
+    primary: {
         main: "#111830",
     },
     secondary: {
-        main: "#397B00",
+        main: "#2C5610",
     },
     text: {
         primary: "#111830 ",
-        secondary: "#18263A", 
+        secondary: "#18263A",
         disabled: "#FFFAF0",
     },
     background: {
