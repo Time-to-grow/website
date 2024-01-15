@@ -2,7 +2,8 @@ import { TypographyVariantsOptions } from "@mui/material";
 
 export const typography: TypographyVariantsOptions = {
     h1: {
-        fontSize: "40px",
+        fontFamily: "futura-pt",
+        fontSize: "50px",
         fontWeight: 500,
         letterSpacing: "0em"
     },
@@ -20,10 +21,12 @@ export const typography: TypographyVariantsOptions = {
     h4: {
         fontSize: "1.75rem",
         fontWeight: 400,
+        fontFamily: "proxima-nova",
     },
     h5: {
         fontSize: "1.5rem",
         fontWeight: 500,
+        fontFamily: "proxima-nova",
     },
     h6: {
         fontSize: "1.25rem",
@@ -40,10 +43,10 @@ export const typography: TypographyVariantsOptions = {
         fontWeight: 500,
     },
     body1: {
-        fontSize: "14px",
-        fontWeight: 300,
+        fontSize: "18px",
+        fontWeight: 400,
         letterSpacing: ".05em",
-        lineHeight: "2em",
+        fontFamily: "proxima-nova",
     },
     body2: {
         fontSize: "14px",
@@ -54,7 +57,6 @@ export const typography: TypographyVariantsOptions = {
         fontSize: "12px",
         fontWeight: 500,
         letterSpacing: ".25em",
-
     },
     caption: {
         fontSize: "0.75rem",

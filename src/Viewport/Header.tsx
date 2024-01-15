@@ -14,14 +14,14 @@ import { useNavigate } from "react-router-dom";
 import { THeader } from "@/types";
 import { fetchContent } from "@/views/Content/api";
 
+const appName = import.meta.env.VITE_APP_NAME || "";
+
 const Header = (): JSX.Element => {
     const res = useQuery(["menu", "assembly", "site-root", 1], fetchContent);
     const content = res.data?.items[0] as THeader;
     const menuItems = content?.fields.blocks.filter(
         (item) => item.fields.pageSlug !== "home"
     );
-
-    const appName = import.meta.env.VITE_APP_NAME || "";
 
     const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
     const open = Boolean(anchorEl);
@@ -48,7 +48,7 @@ const Header = (): JSX.Element => {
 
     return (
         <>
-            <AppBar color="primary" position="static" elevation={0}>
+            <AppBar color="primary" position="fixed" elevation={0}>
                 {menuItems && (
                     <Toolbar>
                         <Box sx={{ flexGrow: 1 }}>
@@ -63,11 +63,20 @@ const Header = (): JSX.Element => {
                                 {appName}
                             </Link>
                         </Box>
-                        <Box sx={{ display: { xs: "none", md: "flex" } }}>
+                        <Box
+                            sx={{
+                                display: { xs: "none", md: "flex" },
+                                "&:hover": { color: "grayText" },
+                            }}>
                             {menuItems.map((item, index) => (
                                 <Button
                                     key={index}
-                                    sx={{ mx: 1 }}
+                                    sx={{
+                                        mx: 1,
+                                        "&:hover": {
+                                            color: "background.paper",
+                                        },
+                                    }}
                                     color="inherit"
                                     onClick={() =>
                                         handleNavigate(item.fields.pageSlug)
