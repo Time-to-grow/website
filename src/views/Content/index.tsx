@@ -7,6 +7,7 @@ import { fetchContent } from "./api";
 import HeroBanner from "./blocks/HeroBanner";
 import Section from "./blocks/Section";
 import TileBlock from "./blocks/TileBlock";
+import Contact from "./Contact";
 import type { ContentBlocks, AllEntries, ContentEntry } from "@/types";
 
 const NotFound = lazy(() => import("@/views/NotFound"));
@@ -32,6 +33,7 @@ const Content = (): JSX.Element => {
             {content?.fields.blocks.map((block, index) => (
                 <ContentBlock key={index} contentEntry={block} />
             ))}
+            <Contact />
         </>
     );
 };

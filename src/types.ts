@@ -14,7 +14,7 @@ export type SectionTypes = {
     }>
 };
 
-export type THerobanner = {
+export type HerobannerTypes = {
     contentEntry: EntrySkeletonType<{
         headline: string;
         subheader: string;
@@ -24,7 +24,7 @@ export type THerobanner = {
 };
 
 type ContentTypes = {
-    heroBanner: THerobanner;
+    heroBanner: HerobannerTypes;
     section: SectionTypes;
     tileBlock: TileBlockProps;
     sys: {
@@ -66,4 +66,4 @@ export type TileBlockProps = {
     }>
 };
 
-export type AllEntries = Record<string, React.FC<THerobanner & SectionTypes & TileBlockProps>>; 
+export type AllEntries = Record<string, React.FC<HerobannerTypes & SectionTypes & TileBlockProps>>; 
