@@ -40,7 +40,7 @@ const HeroBanner = (props: HerobannerTypes): JSX.Element => {
         backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url(${src})`,
         position: "relative",
         width: "100%",
-        height: 800,
+        height: "600px",
         backgroundPosition: "center",
         backgroundRepeat: "no-repeat",
         backgroundSize: "cover",
@@ -49,7 +49,7 @@ const HeroBanner = (props: HerobannerTypes): JSX.Element => {
     };
 
     const skeletonImg = {
-        height: 800,
+        height: "600px",
         backgroundColor: "primary.main",
     };
 
@@ -62,14 +62,14 @@ const HeroBanner = (props: HerobannerTypes): JSX.Element => {
     };
 
     return (
-        <Box id="heroBanner" sx={{ mt: `${scrollPosition * -0.25}px` }}>
-            <Box id="mediaBlock" sx={load ? skeletonImg : heroImage}>
-                <Box id="textBlock" sx={textBlock}>
-                    <Typography id="heroHeadline" variant="h1" color="white">
+        <Box id="hero-banner" sx={{ mt: `${scrollPosition * -0.25}px` }}>
+            <Box id="background-image" sx={load ? skeletonImg : heroImage}>
+                <Box id="text-block" sx={textBlock}>
+                    <Typography id="hero-headline" variant="h1" color="white">
                         {contentEntry.fields.headline}
                     </Typography>
                     <Typography
-                        id="heroBody"
+                        id="hero-body"
                         variant="h5"
                         color="white"
                         sx={{ maxWidth: "50%", my: 2 }}>
