@@ -11,7 +11,7 @@ export const Outline = (): JSX.Element => {
                 <Skeleton variant="text" width={"40%"} height="5rem" />
                 <Skeleton
                     variant="text"
-                    width={"20%"}
+                    width={"40%"}
                     height="2rem"
                     sx={{ m: 5 }}
                 />
