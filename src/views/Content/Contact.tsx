@@ -74,7 +74,7 @@ const Contact = (): JSX.Element => {
             query: state.query,
         };
 
-        const url = "/.netlify/functions/registration";
+        const url = "/.netlify/functions/contact";
         functions.createSubmission({ url, data, setSubmitting, setSubmitted });
     };
 
@@ -86,6 +86,7 @@ const Contact = (): JSX.Element => {
     if (slug === "contact")
         return (
             <Stack
+                id="contact-form"
                 sx={{ py: 6, backgroundColor: "background.default" }}
                 justifyContent="center"
                 alignItems="center"
@@ -94,53 +95,53 @@ const Contact = (): JSX.Element => {
                     <DoneIcon sx={{ fontSize: 100, color: "success.main" }} />
                 )}
                 <Typography
+                    id="contact-headline"
                     gutterBottom
                     align="center"
                     variant="h4"
                     sx={{ mt: 6, mb: 2 }}>
                     {!submitted
-                        ? "Have a question? Get in touch."
-                        : "Thank you for contacting me, I will be in touch!"}
+                        ? "Transform Your Garden with Our Expert Maintenance Solutions - Reach Out Today!"
+                        : "Thank you for getting in touch, we will get back to you shortly."}
                 </Typography>
                 {!submitted && (
-                    <Container maxWidth="md">
-                        <Stack spacing={2}>
-                            <TextField
-                                size="medium"
-                                name="fullName"
-                                onChange={handleChange}
-                                fullWidth
-                                label="Full Name"
-                            />
-                            <TextField
-                                name="email"
-                                size="medium"
-                                helperText={state.errors.email}
-                                error={state.errors.email ? true : false}
-                                onChange={handleChange}
-                                type="email"
-                                fullWidth
-                                label="Email Address"
-                            />
-                            <TextField
-                                name="query"
-                                size="medium"
-                                onChange={handleChange}
-                                fullWidth
-                                label="Enquiry"
-                                multiline
-                                rows={4}
-                            />
-                            <LoadingButton
-                                size="large"
-                                variant="contained"
-                                fullWidth
-                                disabled={!formCheck}
-                                loading={submitting}
-                                onClick={handleSubmit}>
-                                Contact Now
-                            </LoadingButton>
-                        </Stack>
+                    <Container component={Stack} spacing={2} maxWidth="md">
+                        <TextField
+                            size="medium"
+                            name="fullName"
+                            onChange={handleChange}
+                            fullWidth
+                            label="Full Name"
+                        />
+                        <TextField
+                            name="email"
+                            size="medium"
+                            helperText={state.errors.email}
+                            error={state.errors.email ? true : false}
+                            onChange={handleChange}
+                            type="email"
+                            fullWidth
+                            label="Email Address"
+                        />
+                        <TextField
+                            name="query"
+                            size="medium"
+                            onChange={handleChange}
+                            fullWidth
+                            label="Enquiry"
+                            multiline
+                            rows={4}
+                        />
+                        <LoadingButton
+                            id="contact-submit"
+                            size="large"
+                            variant="contained"
+                            fullWidth
+                            disabled={!formCheck}
+                            loading={submitting}
+                            onClick={handleSubmit}>
+                            Contact Now
+                        </LoadingButton>
                     </Container>
                 )}
             </Stack>

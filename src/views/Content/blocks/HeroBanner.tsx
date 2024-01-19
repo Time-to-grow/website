@@ -1,4 +1,4 @@
-import { JSX, useState, useEffect, useCallback } from "react";
+import { JSX, useState, useEffect, useLayoutEffect } from "react";
 
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
@@ -12,44 +12,45 @@ const HeroBanner = (props: HerobannerTypes): JSX.Element => {
     const { contentEntry } = props;
     const [scrollPosition, setScrollPosition] = useState<number>(0);
     const [load, setLoad] = useState<boolean>(true);
+
     const src = String(contentEntry.fields.featureImage.fields.file?.url ?? "");
+    const parallaxDepth = 0.25;
+    const height = { xl: 800, lg: 600, md: 500, sm: 400, xs: 300 };
     functions = new Functions();
 
-    const loadImgSrc = useCallback(
-        (): string =>
-            functions.imageSrc({
-                setLoad,
-                src,
-            }),
-        [src]
-    );
-
     useEffect(() => {
+        functions.imageSrc({ setLoad, src });
+    }, [src]);
+
+    useLayoutEffect(() => {
         const handleScroll = () => {
             setScrollPosition(window.scrollY);
         };
 
-        loadImgSrc();
         window.addEventListener("scroll", handleScroll);
         return () => {
             window.removeEventListener("scroll", handleScroll);
         };
-    }, [src, loadImgSrc]);
+    });
 
     const heroImage = {
         backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url(${src})`,
         position: "relative",
         width: "100%",
-        height: "600px",
+        height,
         backgroundPosition: "center",
         backgroundRepeat: "no-repeat",
         backgroundSize: "cover",
-        transform: `translateY(${scrollPosition * 0.25}px)`,
+        transform: `translateY(${scrollPosition * parallaxDepth}px) scale(1.1)`,
+        transition: "transform 0.1s ease-out",
+        webkitTransform: `translateY(${
+            scrollPosition * parallaxDepth
+        }px) scale(1.1)`,
         zIndex: -1,
     };
 
     const skeletonImg = {
-        height: "600px",
+        height,
         backgroundColor: "primary.main",
     };
 
@@ -59,10 +60,11 @@ const HeroBanner = (props: HerobannerTypes): JSX.Element => {
         pt: 40,
         position: "relative",
         transform: `translateY(${scrollPosition * -0.25}px)`,
+        transition: "transform 0.1s ease-out",
     };
 
     return (
-        <Box id="hero-banner" sx={{ mt: `${scrollPosition * -0.25}px` }}>
+        <Box sx={{ overflow: "hidden" }} id="hero-banner">
             <Box id="background-image" sx={load ? skeletonImg : heroImage}>
                 <Box id="text-block" sx={textBlock}>
                     <Typography id="hero-headline" variant="h1" color="white">
@@ -80,4 +82,5 @@ const HeroBanner = (props: HerobannerTypes): JSX.Element => {
         </Box>
     );
 };
+
 export default HeroBanner;
