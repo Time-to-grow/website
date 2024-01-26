@@ -9,10 +9,9 @@ import TextField from "@mui/material/TextField";
 import Typography from "@mui/material/Typography";
 import { useParams } from "react-router-dom";
 
-import { Functions } from "@/functions";
+import { useEmailValidate, createSubmission } from "@/hooks";
 
 const validEmail = new RegExp("^[a-zA-Z0-9._:$!%-]+@[a-zA-Z0-9.-]+.[a-zA-Z]$");
-let functions: Functions;
 
 type State = {
     fullName: string;
@@ -56,16 +55,17 @@ const init = {
     errors: {},
 };
 
+const url = "/.netlify/functions/contact";
+
 const Contact = (): JSX.Element => {
     const { slug } = useParams();
-    functions = new Functions();
 
     const [state, dispatch] = useReducer(reducer, init);
     const [submitting, setSubmitting] = useState<boolean>(false);
     const [submitted, setSubmitted] = useState<boolean>(false);
-    const formCheck = functions.emailValid(state);
+    const formCheck = useEmailValidate(state);
 
-    const handleSubmit = () => {
+    const handleSubmit = async () => {
         setSubmitting(true);
 
         const data = {
@@ -74,8 +74,12 @@ const Contact = (): JSX.Element => {
             query: state.query,
         };
 
-        const url = "/.netlify/functions/contact";
-        functions.createSubmission({ url, data, setSubmitting, setSubmitted });
+        createSubmission({
+            url,
+            data,
+            setSubmitting,
+            setSubmitted,
+        });
     };
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
