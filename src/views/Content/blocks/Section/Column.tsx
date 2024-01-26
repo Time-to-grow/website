@@ -1,17 +1,17 @@
 import { JSX } from "react";
 
+import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
-import Grid from "@mui/material/Unstable_Grid2";
 
 import { SectionTypes } from "@/types";
 
 const Column = (props: SectionTypes): JSX.Element => {
-    const { contentEntry } = props;
+    const { contentEntry, id } = props;
 
     return (
         <>
             {contentEntry && (
-                <>
+                <Box id={id}>
                     <Typography
                         id="sectionHeadline"
                         align="center"
@@ -19,8 +19,7 @@ const Column = (props: SectionTypes): JSX.Element => {
                         variant="h2">
                         {contentEntry.fields.headline}
                     </Typography>
-                    <Grid container></Grid>
-                </>
+                </Box>
             )}
         </>
     );

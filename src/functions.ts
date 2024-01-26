@@ -13,11 +13,6 @@ type Submission = {
     setSubmitted: (submitted: boolean) => void;
 }
 
-type ImgSrc = {
-    setLoad: (load: boolean) => void;
-    src: string;
-}
-
 export class Functions {
     // checks if the email entered is a valid email
     public emailValid = (state: ValidEmail): boolean => {
@@ -37,7 +32,7 @@ export class Functions {
 
         try {
             const resp = await fetch(url, {
-                method: method ?? "POST",
+                method: method || "POST",
                 headers: {
                     "Content-Type": "application/json"
                 },
@@ -54,17 +49,8 @@ export class Functions {
         catch (error) {
             console.error(error);
             setSubmitting(false);
+        } finally {
+            setSubmitting(false);
         }
-    };
-
-    public imageSrc = (props: ImgSrc): string => {
-        const { setLoad, src } = props;
-        setLoad(true);
-        const imageToLoad = new Image();
-        imageToLoad.src = src;
-        imageToLoad.onload = () => {
-            setLoad(false);
-        };
-        return src;
     };
 }

@@ -7,14 +7,19 @@ import Grid from "@mui/material/Unstable_Grid2";
 import { SectionTypes } from "@/types";
 
 const Right = (props: SectionTypes): JSX.Element => {
-    const { contentEntry } = props;
+    const { contentEntry, id } = props;
 
-    const { url } = contentEntry.fields.image.fields.file ?? {};
+    const { url } = contentEntry.fields.image.fields.file || {};
 
     return (
         <>
             {contentEntry && (
-                <Grid container direction="row" sx={{ my: 2 }} spacing={2}>
+                <Grid
+                    id={id}
+                    container
+                    direction="row"
+                    sx={{ my: 2 }}
+                    spacing={2}>
                     <Grid xs={12} sm={6}>
                         {contentEntry.fields.image && (
                             <CardMedia

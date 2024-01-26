@@ -12,6 +12,7 @@ export type SectionTypes = {
         sectionType: string;
         direction: string;
     }>
+    id: string;
 };
 
 export type HerobannerTypes = {
@@ -21,6 +22,7 @@ export type HerobannerTypes = {
         body: string;
         featureImage: Asset;
     }>
+    id: string;
 };
 
 type ContentTypes = {
@@ -28,6 +30,7 @@ type ContentTypes = {
     section: SectionTypes;
     tileBlock: TileBlockProps;
     sys: {
+        id: string;
         contentType: {
             sys: {
                 id: string;
@@ -42,6 +45,7 @@ export type ContentBlocks = EntrySkeletonType<{
 
 export type ContentEntry = {
     contentEntry: ContentTypes;
+    id: string;
 }
 
 export type THeader = EntrySkeletonType<{

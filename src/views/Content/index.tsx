@@ -1,12 +1,12 @@
 import React, { lazy, JSX } from "react";
 
+import Box from "@mui/material/Box";
 import { useQuery } from "@tanstack/react-query";
 import { useParams } from "react-router-dom";
 
 import { fetchContent } from "./api";
 import HeroBanner from "./blocks/HeroBanner";
 import Section from "./blocks/Section";
-import TileBlock from "./blocks/TileBlock";
 import Contact from "./Contact";
 import { Outline } from "@/components/Outline";
 import type { ContentBlocks, AllEntries, ContentEntry } from "@/types";
@@ -16,7 +16,6 @@ const NotFound = lazy(() => import("@/views/NotFound"));
 const blocks: AllEntries = {
     heroBanner: HeroBanner,
     section: Section,
-    tileBlock: TileBlock,
 };
 
 const Content = (): JSX.Element => {
@@ -33,7 +32,12 @@ const Content = (): JSX.Element => {
         <>
             {!content && <Outline />}
             {content?.fields.blocks.map((block, index) => (
-                <ContentBlock key={index} contentEntry={block} />
+                <Box sx={{ overflowY: "hidden", my: 2 }} key={index}>
+                    <ContentBlock
+                        id={`${slug}-${block?.sys?.contentType.sys.id}-${block.sys?.id}`}
+                        contentEntry={block}
+                    />
+                </Box>
             ))}
             <Contact />
         </>
@@ -45,11 +49,12 @@ export default Content;
 const ContentBlock = (
     props: ContentEntry
 ): Iterable<React.ReactNode> | JSX.Element | React.ReactNode => {
-    const { contentEntry } = props;
+    const { contentEntry, id } = props;
 
     const name = contentEntry?.sys?.contentType.sys.id;
+
     if (!name) {
         return <></>;
     }
-    return blocks[name]({ contentEntry } as any);
+    return blocks[name]({ contentEntry, id } as any);
 };
