@@ -2,13 +2,14 @@ import React, { JSX, useRef, useState, useEffect, useCallback } from "react";
 
 import Box from "@mui/material/Box";
 import CardMedia from "@mui/material/CardMedia";
+import Skeleton from "@mui/material/Skeleton";
 import Stack from "@mui/material/Stack";
 
 import { useOnScroll, useImageSrc } from "@/hooks";
 
 type ImageProps = {
     src: string;
-    height: number | string;
+    height: number | string | { [key: string]: string | number };
     children?: React.ReactNode;
     speed: number;
     clamp?: boolean;
@@ -57,6 +58,9 @@ export const ParallaxImage = (props: ImageProps): JSX.Element => {
     useImageSrc(setLoad, src);
 
     useEffect(() => {
+        window.addEventListener("resize", () => {
+            handleUseOnScroll(winHeight);
+        });
         handleUseOnScroll(winHeight);
     }, [winHeight, speed, clamp, load, src, handleUseOnScroll]);
 
@@ -79,35 +83,39 @@ export const ParallaxImage = (props: ImageProps): JSX.Element => {
         <Box
             {...props}
             ref={box}
-            sx={{ position: "relative", height, padding: 0 }}>
-            <Box
-                sx={{
-                    postion: "absolute",
-                    width: "100%",
-                    height: "100%",
-                    display: "block",
-                    background:
-                        "linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4))",
-                }}>
-                {!load && (
-                    <CardMedia
-                        id="3d-img"
-                        ref={img}
-                        component="img"
-                        src={src}
-                        alt="image"
-                        sx={image}
-                    />
-                )}
-                <Stack
-                    position="absolute"
-                    justifyContent="center"
-                    alignItems="center"
-                    spacing={2}
-                    sx={{ top: 0, bottom: 0, left: 0, right: 0 }}>
-                    {children}
-                </Stack>
-            </Box>
+            sx={{
+                position: "relative",
+                width: "100vw",
+                p: 0,
+                height,
+                background:
+                    "linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4))",
+            }}>
+            {!load ? (
+                <CardMedia
+                    id="3d-img"
+                    ref={img}
+                    component="img"
+                    src={src}
+                    alt="image"
+                    sx={image}
+                />
+            ) : (
+                <Skeleton
+                    id="img-skeleton"
+                    variant="rectangular"
+                    width="100%"
+                    height="100%"
+                />
+            )}
+            <Stack
+                position="absolute"
+                justifyContent="center"
+                alignItems="center"
+                spacing={2}
+                sx={{ top: 0, bottom: 0, left: 0, right: 0 }}>
+                {children}
+            </Stack>
         </Box>
     );
 };

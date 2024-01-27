@@ -10,14 +10,16 @@ import type { SectionTypes } from "@/types";
 
 const Center = (props: SectionTypes): JSX.Element => {
     const { contentEntry } = props;
-
-    const { url } = contentEntry.fields.image.fields.file || {};
+    const src = String(contentEntry.fields.image.fields.file?.url || "");
 
     return (
         <Stack alignItems="center" spacing={2}>
             {contentEntry.fields.image && (
                 <Box>
-                    <ParallaxImage height={800} src={String(url)} speed={1}>
+                    <ParallaxImage
+                        height={{ lg: 600, xs: "auto" }}
+                        src={src}
+                        speed={1}>
                         {contentEntry?.fields.headline && (
                             <Typography
                                 color="white"
