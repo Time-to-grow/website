@@ -106,7 +106,6 @@ type OpenedMenuProps = {
 
 const OpenedMenu = (props: OpenedMenuProps): JSX.Element => {
     const { menuItems, handleNavigate } = props;
-
     const [open, setOpen] = useState<boolean>(false);
 
     const navigateFn = (path: string): void => {
@@ -122,10 +121,13 @@ const OpenedMenu = (props: OpenedMenuProps): JSX.Element => {
         setOpen(false);
     };
 
+    const boxShadow =
+        "rgba(0, 0, 0, 0.2) 0px 3px 5px -1px, rgba(0, 0, 0, 0.14) 0px 5px 8px 0px, rgba(0, 0, 0, 0.12) 0px 1px 14px 0px";
+
     return (
         <Box sx={{ display: { xs: "flex", md: "none" } }}>
-            <IconButton onClick={handleOpen} color="inherit">
-                <MenuIcon />
+            <IconButton size="large" onClick={handleOpen} color="inherit">
+                <MenuIcon fontSize="large" />
             </IconButton>
             <Modal
                 sx={{ display: { xs: "block", md: "none" } }}
@@ -133,39 +135,40 @@ const OpenedMenu = (props: OpenedMenuProps): JSX.Element => {
                 onClose={handleClose}>
                 <Box
                     sx={{
-                        display: "flex",
                         position: "absolute",
-                        top: "50%",
-                        left: "50%",
-                        transform: "translate(-50%, -50%)",
-                        flexDirection: "column",
+                        height: "80vh",
+                        width: "90%",
+                        transform: "translate(5%, 10%)",
                         justifyContent: "center",
                         alignItems: "center",
                     }}>
-                    <Avatar
-                        onClick={handleClose}
-                        sx={{
-                            width: 75,
-                            height: 75,
-                            bgcolor: "primary.main",
-                            cursor: "pointer",
-                        }}>
-                        <CloseIcon fontSize="large" />
-                    </Avatar>
                     <Box
                         sx={{
-                            height: "50vh",
-                            backgroundColor: "primary.main",
-                            borderRadius: "0.25rem",
-                            mt: 1,
-                            boxShadow:
-                                "rgba(0, 0, 0, 0.2) 0px 3px 5px -1px, rgba(0, 0, 0, 0.14) 0px 5px 8px 0px, rgba(0, 0, 0, 0.12) 0px 1px 14px 0px",
+                            display: "flex",
+                            justifyContent: "center",
+                            alignItems: "center",
                         }}>
-                        <List
+                        <Avatar
+                            onClick={handleClose}
                             sx={{
-                                maxWidth: 500,
-                                minWidth: 300,
+                                width: 75,
+                                height: 75,
+                                bgcolor: "primary.main",
+                                cursor: "pointer",
+                                boxShadow,
                             }}>
+                            <CloseIcon fontSize="large" />
+                        </Avatar>
+                    </Box>
+                    <Box
+                        sx={{
+                            height: "80vh",
+                            backgroundColor: "primary.main",
+                            borderRadius: "8px",
+                            mt: 1,
+                            boxShadow,
+                        }}>
+                        <List>
                             {menuItems.map((item, index) => (
                                 <ListItem key={index}>
                                     <ListItemButton
