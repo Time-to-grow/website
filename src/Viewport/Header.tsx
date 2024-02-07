@@ -1,12 +1,17 @@
-import React, { useState, JSX } from "react";
+import { useState, JSX } from "react";
 
+import CloseIcon from "@mui/icons-material/Close";
 import MenuIcon from "@mui/icons-material/Menu";
 import AppBar from "@mui/material/AppBar";
+import Avatar from "@mui/material/Avatar";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import IconButton from "@mui/material/IconButton";
 import Link from "@mui/material/Link";
-import Menu from "@mui/material/Menu";
+import List from "@mui/material/List";
+import ListItem from "@mui/material/ListItem";
+import ListItemButton from "@mui/material/ListItemButton";
+import Modal from "@mui/material/Modal";
 import Toolbar from "@mui/material/Toolbar";
 import { useQuery } from "@tanstack/react-query";
 import { useNavigate } from "react-router-dom";
@@ -17,26 +22,27 @@ import { fetchContent } from "@/views/Content/api";
 const appName = import.meta.env.VITE_APP_NAME || "";
 
 const Header = (): JSX.Element => {
-    const res = useQuery(["menu", "assembly", "site-root", 1], fetchContent);
+    const res = useQuery({
+        queryKey: ["menu", "assembly", "site-root", 1],
+        queryFn: fetchContent,
+    });
     const content = res.data?.items[0] as THeader;
     const menuItems = content?.fields.blocks.filter(
         (item) => item.fields.pageSlug !== "home"
     );
-
-    const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
-    const open = Boolean(anchorEl);
+    const [open, setOpen] = useState<boolean>(false);
     const navigate = useNavigate();
 
-    const handleClick = (e: React.MouseEvent<HTMLElement>): void => {
-        setAnchorEl(e.currentTarget);
+    const handleClick = (): void => {
+        setOpen(true);
     };
 
     const handleClose = (): void => {
-        setAnchorEl(null);
+        setOpen(false);
     };
 
     const handleNavigate = (path: string): void => {
-        setAnchorEl(null);
+        setOpen(false);
         if (!path) {
             return;
         }
@@ -96,22 +102,63 @@ const Header = (): JSX.Element => {
                             <IconButton onClick={handleClick} color="inherit">
                                 <MenuIcon />
                             </IconButton>
-                            <Menu
-                                anchorEl={anchorEl}
+                            <Modal
+                                sx={{
+                                    display: { xs: "block", md: "none" },
+                                }}
                                 open={open}
                                 onClose={handleClose}>
-                                {menuItems.map((item, index) => (
-                                    <Button
-                                        key={index}
-                                        sx={{ mx: 1 }}
-                                        color="inherit"
-                                        onClick={() =>
-                                            handleNavigate(item.fields.pageSlug)
-                                        }>
-                                        {item.fields.name}
-                                    </Button>
-                                ))}
-                            </Menu>
+                                <Box
+                                    sx={{
+                                        display: "flex",
+                                        position: "absolute",
+                                        top: "50%",
+                                        left: "50%",
+                                        transform: "translate(-50%, -50%)",
+                                        flexDirection: "column",
+                                        justifyContent: "center",
+                                        alignItems: "center",
+                                    }}>
+                                    <Avatar
+                                        onClick={handleClose}
+                                        sx={{
+                                            width: 75,
+                                            height: 75,
+                                            bgcolor: "primary.main",
+                                            cursor: "pointer",
+                                        }}>
+                                        <CloseIcon fontSize="large" />
+                                    </Avatar>
+                                    <Box
+                                        sx={{
+                                            height: "50vh",
+                                            backgroundColor: "primary.main",
+                                            borderRadius: "0.25rem",
+                                            mt: 1,
+                                        }}>
+                                        <List
+                                            sx={{
+                                                maxWidth: 500,
+                                                minWidth: 300,
+                                            }}>
+                                            {menuItems.map((item, index) => (
+                                                <ListItem key={index}>
+                                                    <ListItemButton
+                                                        sx={{ color: "white" }}
+                                                        onClick={() =>
+                                                            handleNavigate(
+                                                                item.fields
+                                                                    .pageSlug
+                                                            )
+                                                        }>
+                                                        {item.fields.name}
+                                                    </ListItemButton>
+                                                </ListItem>
+                                            ))}
+                                        </List>
+                                    </Box>
+                                </Box>
+                            </Modal>
                         </Box>
                     </Toolbar>
                 )}

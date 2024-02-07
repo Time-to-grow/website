@@ -22,7 +22,10 @@ const Content = (): JSX.Element => {
     let { type, slug } = useParams();
     [type, slug] = [type || "assembly", slug || "home"];
 
-    const res = useQuery(["content", type, slug], fetchContent);
+    const res = useQuery({
+        queryKey: ["content", type, slug],
+        queryFn: fetchContent,
+    });
     const content = res.data?.items[0] as ContentBlocks;
 
     if (res.data?.items.length === 0) {

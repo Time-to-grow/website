@@ -1,6 +1,7 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
-export const useImageSrc = (setLoad: (load: boolean) => void, src: string) => {
+export const useImageSrc = (src: string) => {
+    const [load, setLoad] = useState<boolean>(true);
     const imageSrc = (setLoad: (load: boolean) => void, src: string): string => {
         setLoad(true);
         const imageToLoad = new Image();
@@ -18,6 +19,8 @@ export const useImageSrc = (setLoad: (load: boolean) => void, src: string) => {
     useEffect(() => {
         imageSrc(setLoad, src);
     }, [setLoad, src]);
+
+    return { load };
 };
 
 export default useImageSrc;

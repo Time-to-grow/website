@@ -21,7 +21,6 @@ export const ParallaxImage = (props: ImageProps): JSX.Element => {
     const img = useRef<HTMLImageElement>(null);
     const winHeight = window.innerHeight || 0;
     const [scrollPosition, setScrollPosition] = useState<number>(0);
-    const [load, setLoad] = useState<boolean>(true);
 
     const handleUseOnScroll = useCallback(
         (winHeight: number, scrollY?: number) => {
@@ -55,7 +54,7 @@ export const ParallaxImage = (props: ImageProps): JSX.Element => {
         [clamp, speed]
     );
 
-    useImageSrc(setLoad, src);
+    const { load } = useImageSrc(src);
 
     useEffect(() => {
         window.addEventListener("resize", () => {
@@ -72,8 +71,14 @@ export const ParallaxImage = (props: ImageProps): JSX.Element => {
         transform: `translate(0, ${scrollPosition}px)`,
         position: "relative",
         backgroundColor: "rgba(0, 0, 0, 0.4))",
-        width: "100%",
-        height: "auto",
+        // width: {
+        //     xl: "100vw",
+        //     lg: "100vw",
+        //     md: "100vw",
+        //     sm: "100vw",
+        //     xs: "100vw",
+        // },
+        height: { lg: "60vw", xs: "80vw" },
         m: 0,
         p: 0,
         zIndex: -1,
