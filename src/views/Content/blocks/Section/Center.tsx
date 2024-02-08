@@ -1,6 +1,5 @@
 import { JSX } from "react";
 
-import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
@@ -15,36 +14,34 @@ const Center = (props: SectionTypes): JSX.Element => {
     return (
         <Stack spacing={2}>
             {contentEntry.fields.image && (
-                <Box>
-                    <ParallaxImage src={src} speed={1}>
-                        {contentEntry?.fields.headline && (
-                            <Typography
-                                color="white"
-                                id="sectionHeadline"
-                                align="center"
-                                variant="h3"
-                                sx={{
-                                    pt: { xs: 2, md: 4 },
-                                    my: 2,
-                                    position: "relative",
-                                }}>
-                                {contentEntry.fields.headline}
-                            </Typography>
-                        )}
-                        <Typography color="white">
-                            {contentEntry?.fields.body}
+                <ParallaxImage src={src} speed={1}>
+                    {contentEntry?.fields.headline && (
+                        <Typography
+                            color="white"
+                            id="sectionHeadline"
+                            align="center"
+                            variant="h3"
+                            sx={{
+                                pt: { xs: 2, md: 4 },
+                                my: 2,
+                                position: "relative",
+                            }}>
+                            {contentEntry.fields.headline}
                         </Typography>
-                        {contentEntry?.fields.ctaLabel && (
-                            <Button
-                                id="sectionCta"
-                                href={contentEntry.fields.ctaSlug}
-                                variant="contained"
-                                sx={{ mt: 4, mb: 4 }}>
-                                {contentEntry.fields.ctaLabel}
-                            </Button>
-                        )}
-                    </ParallaxImage>
-                </Box>
+                    )}
+                    <Typography color="white">
+                        {contentEntry?.fields.body}
+                    </Typography>
+                    {contentEntry?.fields.ctaLabel && (
+                        <Button
+                            id="sectionCta"
+                            href={contentEntry.fields.ctaSlug}
+                            variant="contained"
+                            sx={{ mt: 4, mb: 4 }}>
+                            {contentEntry.fields.ctaLabel}
+                        </Button>
+                    )}
+                </ParallaxImage>
             )}
         </Stack>
     );

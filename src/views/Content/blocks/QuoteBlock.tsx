@@ -2,11 +2,9 @@ import Container from "@mui/material/Container";
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
 
-export const QuoteBlock = (props: {
-    contentEntry: {
-        fields: { body: string };
-    };
-}): JSX.Element => {
+import type { GenericContent } from "@/types";
+
+export const QuoteBlock = (props: GenericContent): JSX.Element => {
     const { contentEntry } = props;
 
     return (
@@ -18,7 +16,7 @@ export const QuoteBlock = (props: {
             alignItems="center"
             spacing={2}>
             <Grid item>
-                <Container>
+                <Container maxWidth={false} sx={{ maxWidth: 1000 }}>
                     <Typography variant="h3" align="center">
                         {contentEntry.fields.body}
                     </Typography>

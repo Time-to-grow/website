@@ -27,6 +27,7 @@ export type HerobannerTypes = {
 type ContentTypes = {
     heroBanner: HerobannerTypes;
     section: SectionTypes;
+    quoteBlock: GenericContent;
     tileBlock: TileBlockProps;
     sys: {
         id: string;
@@ -69,4 +70,10 @@ export type TileBlockProps = {
     }>
 };
 
-export type AllEntries = Record<string, React.FC<HerobannerTypes & SectionTypes & TileBlockProps>>; 
+export type GenericContent = {
+    contentEntry: {
+        fields: { [key: string]: string };
+    };
+}
+
+export type AllEntries = Record<string, React.FC<HerobannerTypes & SectionTypes & GenericContent & TileBlockProps>>; 
