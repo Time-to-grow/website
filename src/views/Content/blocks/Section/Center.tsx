@@ -16,10 +16,7 @@ const Center = (props: SectionTypes): JSX.Element => {
         <Stack spacing={2}>
             {contentEntry.fields.image && (
                 <Box>
-                    <ParallaxImage
-                        height={{ lg: 600, xs: "auto" }}
-                        src={src}
-                        speed={1}>
+                    <ParallaxImage src={src} speed={1}>
                         {contentEntry?.fields.headline && (
                             <Typography
                                 color="white"

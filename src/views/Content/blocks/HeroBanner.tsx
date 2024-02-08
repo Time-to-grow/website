@@ -12,10 +12,7 @@ const HeroBanner = (props: HerobannerTypes): JSX.Element => {
 
     return (
         <Box id={id}>
-            <ParallaxImage
-                height={{ lg: "50vw", xs: "60%" }}
-                src={src}
-                speed={1}>
+            <ParallaxImage src={src} speed={1}>
                 <Typography
                     align="center"
                     id="hero-headline"

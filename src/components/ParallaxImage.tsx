@@ -8,14 +8,13 @@ import { useOnScroll, useImageSrc } from "@/hooks";
 
 type ImageProps = {
     src: string;
-    height: number | string | { [key: string]: string | number };
     children?: React.ReactNode;
     speed: number;
     clamp?: boolean;
 };
 
 export const ParallaxImage = (props: ImageProps): JSX.Element => {
-    const { src, height, children, speed, clamp } = props;
+    const { src, children, speed, clamp } = props;
     const box = useRef<HTMLDivElement>(null);
     const img = useRef<HTMLImageElement>(null);
     const winHeight = window.innerHeight || 0;
@@ -73,7 +72,7 @@ export const ParallaxImage = (props: ImageProps): JSX.Element => {
         transform: `translate(0, ${scrollPosition}px)`,
         position: "relative",
         backgroundColor: "rgba(0, 0, 0, 0.4))",
-        height: { lg: "70vw", xs: "60vw" },
+        height: { lg: "60vw", xs: "90vw" },
         m: 0,
         p: 0,
         zIndex: -1,
@@ -87,7 +86,7 @@ export const ParallaxImage = (props: ImageProps): JSX.Element => {
                 position: "relative",
                 width: "100%",
                 p: 0,
-                height,
+                height: { lg: "50vw", xs: "80vw" },
             }}>
             {!load ? (
                 <Box id="3d-img" ref={img} sx={image} />
