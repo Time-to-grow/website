@@ -67,10 +67,9 @@ export const ParallaxImage = (props: ImageProps): JSX.Element => {
     });
 
     const image = {
-        backgroundImage: `url(${src})`,
+        background: `linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url(${src})`,
         backgroundSize: "cover",
         backgroundPosition: "center",
-
         transform: `translate(0, ${scrollPosition}px)`,
         position: "relative",
         backgroundColor: "rgba(0, 0, 0, 0.4))",
@@ -89,8 +88,6 @@ export const ParallaxImage = (props: ImageProps): JSX.Element => {
                 width: "100%",
                 p: 0,
                 height,
-                background:
-                    "linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4))",
             }}>
             {!load ? (
                 <Box id="3d-img" ref={img} sx={image} />
