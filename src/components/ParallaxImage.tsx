@@ -1,4 +1,4 @@
-import React, { JSX, useRef, useState, useEffect, useCallback } from "react";
+import React, { JSX, useRef, useState, useCallback } from "react";
 
 import Box from "@mui/material/Box";
 import CardMedia from "@mui/material/CardMedia";
@@ -19,7 +19,6 @@ export const ParallaxImage = (props: ImageProps): JSX.Element => {
     const { src, height, children, speed, clamp } = props;
     const box = useRef<HTMLDivElement>(null);
     const img = useRef<HTMLImageElement>(null);
-    const winHeight = window.innerHeight || 0;
     const [scrollPosition, setScrollPosition] = useState<number>(0);
 
     const handleUseOnScroll = useCallback(
@@ -55,14 +54,6 @@ export const ParallaxImage = (props: ImageProps): JSX.Element => {
     );
 
     const { load } = useImageSrc(src);
-
-    useEffect(() => {
-        window.addEventListener("resize", () => {
-            handleUseOnScroll(winHeight);
-        });
-        handleUseOnScroll(winHeight);
-    }, [winHeight, speed, clamp, load, src, handleUseOnScroll]);
-
     useOnScroll((scrollY, winHeight) => {
         handleUseOnScroll(winHeight, scrollY);
     });
@@ -71,7 +62,7 @@ export const ParallaxImage = (props: ImageProps): JSX.Element => {
         transform: `translate(0, ${scrollPosition}px)`,
         position: "relative",
         backgroundColor: "rgba(0, 0, 0, 0.4))",
-        height: { lg: "70vw", xs: "60vh" },
+        height: { lg: "70vw", xs: "60vw" },
         m: 0,
         p: 0,
         zIndex: -1,
