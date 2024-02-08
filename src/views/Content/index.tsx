@@ -6,6 +6,7 @@ import { useParams } from "react-router-dom";
 
 import { fetchContent } from "./api";
 import HeroBanner from "./blocks/HeroBanner";
+import { QuoteBlock } from "./blocks/QuoteBlock";
 import Section from "./blocks/Section";
 import Contact from "./Contact";
 import { Outline } from "@/components/Outline";
@@ -16,6 +17,7 @@ const NotFound = lazy(() => import("@/views/NotFound"));
 const blocks: AllEntries = {
     heroBanner: HeroBanner,
     section: Section,
+    quoteBlock: QuoteBlock,
 };
 
 const Content = (): JSX.Element => {
@@ -35,7 +37,7 @@ const Content = (): JSX.Element => {
         <>
             {!content && <Outline />}
             {content?.fields.blocks.map((block, index) => (
-                <Box sx={{ overflowY: "hidden", my: 2 }} key={index}>
+                <Box sx={{ overflowY: "hidden" }} key={index}>
                     <ContentBlock
                         id={`${slug}-${block?.sys?.contentType.sys.id}-${block.sys?.id}`}
                         contentEntry={block}

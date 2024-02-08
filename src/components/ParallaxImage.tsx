@@ -1,7 +1,6 @@
-import React, { JSX, useRef, useState, useCallback } from "react";
+import React, { JSX, useRef, useState, useEffect, useCallback } from "react";
 
 import Box from "@mui/material/Box";
-import CardMedia from "@mui/material/CardMedia";
 import Skeleton from "@mui/material/Skeleton";
 import Stack from "@mui/material/Stack";
 
@@ -19,6 +18,7 @@ export const ParallaxImage = (props: ImageProps): JSX.Element => {
     const { src, height, children, speed, clamp } = props;
     const box = useRef<HTMLDivElement>(null);
     const img = useRef<HTMLImageElement>(null);
+    const winHeight = window.innerHeight || 0;
     const [scrollPosition, setScrollPosition] = useState<number>(0);
 
     const handleUseOnScroll = useCallback(
@@ -54,11 +54,23 @@ export const ParallaxImage = (props: ImageProps): JSX.Element => {
     );
 
     const { load } = useImageSrc(src);
+
+    useEffect(() => {
+        window.addEventListener("resize", () => {
+            handleUseOnScroll(winHeight);
+        });
+        handleUseOnScroll(winHeight);
+    }, [winHeight, speed, clamp, load, src, handleUseOnScroll]);
+
     useOnScroll((scrollY, winHeight) => {
         handleUseOnScroll(winHeight, scrollY);
     });
 
     const image = {
+        backgroundImage: `url(${src})`,
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+
         transform: `translate(0, ${scrollPosition}px)`,
         position: "relative",
         backgroundColor: "rgba(0, 0, 0, 0.4))",
@@ -81,14 +93,7 @@ export const ParallaxImage = (props: ImageProps): JSX.Element => {
                     "linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4))",
             }}>
             {!load ? (
-                <CardMedia
-                    id="3d-img"
-                    ref={img}
-                    component="img"
-                    src={src}
-                    alt="image"
-                    sx={image}
-                />
+                <Box id="3d-img" ref={img} sx={image} />
             ) : (
                 <Skeleton
                     id="img-skeleton"

@@ -13,7 +13,7 @@ const Center = (props: SectionTypes): JSX.Element => {
     const src = String(contentEntry.fields.image.fields.file?.url || "");
 
     return (
-        <Stack alignItems="center" spacing={2}>
+        <Stack spacing={2}>
             {contentEntry.fields.image && (
                 <Box>
                     <ParallaxImage

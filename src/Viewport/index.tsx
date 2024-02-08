@@ -13,13 +13,7 @@ const Viewport = ({ children }: ViewportProps): JSX.Element => {
     return (
         <>
             <Header />
-            <Box
-                id="website-body"
-                sx={{
-                    mx: { xs: "0.25rem", md: "2.5rem" },
-                }}>
-                {children}
-            </Box>
+            <Box id="website-body">{children}</Box>
             <Footer />
         </>
     );
