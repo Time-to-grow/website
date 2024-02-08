@@ -144,7 +144,7 @@ const Contact = (): JSX.Element => {
                             disabled={!formCheck}
                             loading={submitting}
                             onClick={handleSubmit}>
-                            Contact Now
+                            Get in touch
                         </LoadingButton>
                     </Container>
                 )}

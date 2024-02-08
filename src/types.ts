@@ -19,7 +19,6 @@ export type HerobannerTypes = {
     contentEntry: EntrySkeletonType<{
         headline: string;
         subheader: string;
-        body: string;
         featureImage: Asset;
     }>
     id: string;

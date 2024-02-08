@@ -71,14 +71,7 @@ export const ParallaxImage = (props: ImageProps): JSX.Element => {
         transform: `translate(0, ${scrollPosition}px)`,
         position: "relative",
         backgroundColor: "rgba(0, 0, 0, 0.4))",
-        // width: {
-        //     xl: "100vw",
-        //     lg: "100vw",
-        //     md: "100vw",
-        //     sm: "100vw",
-        //     xs: "100vw",
-        // },
-        height: { lg: "60vw", xs: "80vw" },
+        height: { lg: "70vw", xs: "60vh" },
         m: 0,
         p: 0,
         zIndex: -1,
@@ -90,7 +83,7 @@ export const ParallaxImage = (props: ImageProps): JSX.Element => {
             ref={box}
             sx={{
                 position: "relative",
-                width: "100vw",
+                width: "100%",
                 p: 0,
                 height,
                 background:
