@@ -156,11 +156,14 @@ const OpenedMenu = (props: OpenedMenuProps): JSX.Element => {
                                 bgcolor: "primary.main",
                                 cursor: "pointer",
                                 boxShadow,
+                                "&:hover": {
+                                    backgroundColor: "primary.light",
+                                },
                             }}>
                             <CloseIcon fontSize="large" />
                         </Avatar>
                     </Box>
-                    <Box
+                    <List
                         sx={{
                             height: "80vh",
                             backgroundColor: "primary.main",
@@ -168,20 +171,24 @@ const OpenedMenu = (props: OpenedMenuProps): JSX.Element => {
                             mt: 1,
                             boxShadow,
                         }}>
-                        <List>
-                            {menuItems.map((item, index) => (
-                                <ListItem key={index}>
-                                    <ListItemButton
-                                        sx={{ color: "white" }}
-                                        onClick={() =>
-                                            navigateFn(item.fields.pageSlug)
-                                        }>
-                                        {item.fields.name}
-                                    </ListItemButton>
-                                </ListItem>
-                            ))}
-                        </List>
-                    </Box>
+                        {menuItems.map((item, index) => (
+                            <ListItem key={index}>
+                                <ListItemButton
+                                    sx={{
+                                        color: "white",
+                                        borderRadius: "8px",
+                                        "&:hover": {
+                                            backgroundColor: "primary.light",
+                                        },
+                                    }}
+                                    onClick={() =>
+                                        navigateFn(item.fields.pageSlug)
+                                    }>
+                                    {item.fields.name}
+                                </ListItemButton>
+                            </ListItem>
+                        ))}
+                    </List>
                 </Box>
             </Modal>
         </Box>
