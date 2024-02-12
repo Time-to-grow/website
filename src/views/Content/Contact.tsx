@@ -1,5 +1,5 @@
 /* eslint-disable camelcase */
-import React, { useState, useReducer } from "react";
+import React, { useReducer } from "react";
 
 import DoneIcon from "@mui/icons-material/Done";
 import LoadingButton from "@mui/lab/LoadingButton";
@@ -9,7 +9,7 @@ import TextField from "@mui/material/TextField";
 import Typography from "@mui/material/Typography";
 import { useParams } from "react-router-dom";
 
-import { useEmailValidate, createSubmission } from "@/hooks";
+import { useEmailValidate, useCreateSubmission } from "@/hooks";
 
 const validEmail = new RegExp("^[a-zA-Z0-9._:$!%-]+@[a-zA-Z0-9.-]+.[a-zA-Z]$");
 
@@ -55,32 +55,20 @@ const init = {
     errors: {},
 };
 
-const url = "/.netlify/functions/contact";
-
 const Contact = (): JSX.Element => {
     const { slug } = useParams();
 
     const [state, dispatch] = useReducer(reducer, init);
-    const [submitting, setSubmitting] = useState<boolean>(false);
-    const [submitted, setSubmitted] = useState<boolean>(false);
     const formCheck = useEmailValidate(state);
 
-    const handleSubmit = async () => {
-        setSubmitting(true);
-
-        const data = {
+    const { submitting, submitted, createSubmission } = useCreateSubmission({
+        url: "/.netlify/functions/contact",
+        data: {
             full_name: state.fullName,
             email: state.email,
             query: state.query,
-        };
-
-        createSubmission({
-            url,
-            data,
-            setSubmitting,
-            setSubmitted,
-        });
-    };
+        },
+    });
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const { name, value } = e.target;
@@ -143,7 +131,7 @@ const Contact = (): JSX.Element => {
                             fullWidth
                             disabled={!formCheck}
                             loading={submitting}
-                            onClick={handleSubmit}>
+                            onClick={createSubmission}>
                             Get in touch
                         </LoadingButton>
                     </Container>
